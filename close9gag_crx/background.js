@@ -10,7 +10,7 @@ function close_all_9gag() {
   chrome.tabs.query(queryInfo, function(tabs) {
 
 	tabs.forEach(function closeIf9Gag(tab, index) {
-		if (tab.url.includes("9gag.com")){
+		if (tab.url.includes("9gag.com") || tab.url.includes("stayfocusd.com")){
 			chrome.tabs.remove(tab.id);
 		}
     })
@@ -18,6 +18,4 @@ function close_all_9gag() {
   setTimeout(close_all_9gag,15*min);
 }
 
-close_all_9gag();
-
-//document.addEventListener('DOMContentLoaded', close_all_9gag);
+setTimeout(close_all_9gag,15*min);
