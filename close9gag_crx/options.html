@@ -8,13 +8,20 @@
 </head>
 
 <body>
-  <b>Black List:</b>
-  </br>
 
-  <textarea id="BlackListedSites"></textarea>
 
+  <b>TimeOut (in minutes):</b>
+  </br>  
+  <input type="number" id="timeout" min="1" max="30">
+  </br></br>
+  <b>Url Black List:</b>
+  </br>  
+  <textarea rows="4" cols="70" id="urlBlackList" style="font-size: 12pt">
+  </textarea>
+  
   <div id="status"></div>
-  <button id="save">Save</button>
+  </br>  
+  <button id="save">Save</button> <button id="test">Test</button>
 
   <script src="options.js"></script>
 </body>
