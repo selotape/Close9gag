@@ -10,7 +10,6 @@ function close_all_9gag(){
 				urlBlackList: '9gag.com',
 				timeout: 15*MIN
 			}, function(items) {
-				//TODO - trim then remove empty items
 				urlBlackList = items.urlBlackList.split(",");
 				urlBlackList.forEach(function(url) {
 					url = url.trim();
