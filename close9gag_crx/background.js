@@ -13,7 +13,8 @@ function close_all_9gag(){
 				//TODO - trim then remove empty items
 				urlBlackList = items.urlBlackList.split(",");
 				urlBlackList.forEach(function(url) {
-					if (tab.url.includes(url)){
+					url = url.trim();
+					if ((url != "") && (tab.url.includes(url))){
 						chrome.tabs.remove(tab.id);
 					}
 				});

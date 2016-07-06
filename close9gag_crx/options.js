@@ -15,11 +15,10 @@ function save_options() {
   });
 }
 
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
+// Restores select box and checkbox state using the preferences stored in chrome.storage.
 function restore_options() {
   chrome.storage.sync.get({
-	urlBlackList: '9gag.com,',
+	urlBlackList: '9gag.com',
 	timeout: 15
   }, function(items) {
 	document.getElementById('urlBlackList').value = items.urlBlackList;
