@@ -1,7 +1,7 @@
 var SEC = 1000;
 var MIN = 60*SEC;
 var HOUR = 60*MIN;
-var TIMEOUT = 1*MIN; //NEVER GO BELOW 1*MIN !!
+var TIMEOUT = 15*MIN; //NEVER GO BELOW 1*MIN !!
 
 function close_all_9gag(){
 	chrome.tabs.query({}, function(tabs) {
