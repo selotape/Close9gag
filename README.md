@@ -27,3 +27,5 @@ ToDo:
 	- add validations in script (version doesn't preexist, full check of manifest)
 	- auto-increment version number
 	!- push to chrome webstore
+
+
