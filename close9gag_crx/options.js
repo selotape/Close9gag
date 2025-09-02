@@ -27,8 +27,7 @@ function restore_options() {
 }
 
 function test_close_all() {
-	var backgroundPage = chrome.extension.getBackgroundPage();
-	backgroundPage.close_all_9gag();	
+	chrome.runtime.sendMessage({action: 'close_tabs'});
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);

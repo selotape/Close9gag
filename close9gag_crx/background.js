@@ -1,31 +1,45 @@
-var SEC = 1000;
-var MIN = 60*SEC;
-var HOUR = 60*MIN;
-var TIMEOUT = 15*MIN; //NEVER GO BELOW 1*MIN !!
+const SEC = 1000;
+const MIN = 60 * SEC;
+const HOUR = 60 * MIN;
+let TIMEOUT = 15 * MIN; //NEVER GO BELOW 1*MIN !!
 
-function close_all_9gag(){
-	chrome.tabs.query({}, function(tabs) {
-		tabs.forEach(function closeIf9Gag(tab, index) {
-			chrome.storage.sync.get({
-				urlBlackList: '9gag.com',
-				timeout: 15*MIN
-			}, function(items) {
-				urlBlackList = items.urlBlackList.split(",");
-				urlBlackList.forEach(function(url) {
-					url = url.trim();
-					if ((url != "") && (tab.url.includes(url))){
-						chrome.tabs.remove(tab.id);
-					}
-				});
-				TIMEOUT = items.timeout*MIN;
-			});
+async function close_all_9gag() {
+	try {
+		const tabs = await chrome.tabs.query({});
+		const items = await chrome.storage.sync.get({
+			urlBlackList: '9gag.com',
+			timeout: 15
 		});
-	});
+		
+		const urlBlackList = items.urlBlackList.split(",");
+		TIMEOUT = items.timeout * MIN;
+		
+		for (const tab of tabs) {
+			for (const url of urlBlackList) {
+				const trimmedUrl = url.trim();
+				if (trimmedUrl !== "" && tab.url.includes(trimmedUrl)) {
+					await chrome.tabs.remove(tab.id);
+					break;
+				}
+			}
+		}
+	} catch (error) {
+		console.error('Error closing tabs:', error);
+	}
 }
 
 function close_all_9gag_and_repeat() {
 	close_all_9gag();
-	setTimeout(close_all_9gag_and_repeat,TIMEOUT);
+	setTimeout(close_all_9gag_and_repeat, TIMEOUT);
 }
 
-setTimeout(close_all_9gag_and_repeat,TIMEOUT);
+// Listen for messages from options page
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+	if (request.action === 'close_tabs') {
+		close_all_9gag();
+		sendResponse({success: true});
+	}
+});
+
+// Start the process when service worker starts
+close_all_9gag_and_repeat();
