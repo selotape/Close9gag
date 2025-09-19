@@ -6,6 +6,9 @@ function save_options() {
 	urlBlackList: urlBlackList,
 	timeout: timeout
   }, function() {
+    // Notify background script to update alarm with new timeout
+    chrome.runtime.sendMessage({action: 'update_alarm'});
+    
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';

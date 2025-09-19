@@ -3,7 +3,7 @@
 
   "name": "CLOSE ALL THE 9GAG !!1",
   "description": "closes all 9gag (and other) tabs every X minutes",
-  "version": "0.0.3",
+  "version": "0.0.4",
   
   "background": {
     "service_worker": "background.js"
@@ -19,6 +19,7 @@
   },
   "permissions": [
     "tabs",
-    "storage"
+    "storage",
+    "alarms"
   ]
 }
